@@ -1,5 +1,5 @@
 ---
-const { title } = Astro.props;
+const { title, class: className } = Astro.props;
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -11,8 +11,8 @@ const { title } = Astro.props;
       rivo's notes
     </title>
   </head>
-  <body class="bg-dark-900 text-white max-w-screen-md mx-auto">
-    <main>
+  <body class="font-serif bg-light-400 text-dark-900 max-w-screen-md mx-auto mt-16">
+    <main class:list={[className]}>
       <slot />
     </main>
   </body>

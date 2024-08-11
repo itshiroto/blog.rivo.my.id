@@ -1,0 +1,34 @@
+---
+// HACK: ini gatau kenapa error di nvim, tapi bisa kerender kok di FE
+// @ts-nocheck
+
+import Layout from "@/layout/base.astro"
+import type { GetStaticPaths } from "astro";
+import { getCollection } from 'astro:content';
+
+export const getStaticPaths = (async () => {
+  const articleEntry = await getCollection('articles');
+  return articleEntry.map(entry => ({
+      params: { slug: entry.slug }, props: { entry },
+  }));
+}) satisfies GetStaticPaths;
+
+const { entry } = Astro.props;
+
+const { Content } = await entry.render();
+---
+
+<Layout title={entry.data.title}>
+  <a href="/" class="flex items-center gap-2 text-gray-400 hover:text-orange-700 transition mb-4">
+    <div class="inline-block i-ci-thin-long-left size-8"></div>
+    Kembali ke halaman depan
+  </a>
+  <div class="mb-12">
+    <h1 class="text-6xl mb-4 font-bold">{entry.data.title}</h1>
+    <h4 class="text-gray-600 text-base italic mb-6">ditulis pada {new Date(entry.data.date).toLocaleDateString("id-ID", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</h4>
+    <div class="w-full border-b border-gray-300"/>
+  </div>
+  <div class="prose text-justify text-lg w-full">
+    <Content/>
+  </div>
+</Layout>
