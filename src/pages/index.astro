@@ -1,14 +1,32 @@
 ---
 import Layout from "@/layout/base.astro"
+import { getCollection } from "astro:content"
+
+const allArticles = await getCollection('articles');
 ---
 
 <Layout title="test">
-  <div class="flex items-end">
-    <h1 class="font-bold text-5xl">catatan seorang rivo</h1>
+  <div class="flex flex-col sm:flex-row sm:items-end sm:gap-16 gap-8 mb-24">
+    <h1 class="font-bold text-5xl">
+      catatan <br />
+      seorang <br />
+      <a href="https://rivo.my.id" class="underline hover:text-orange-600 transition">rivo</a>
+    </h1>
     <p class="text-lg">
       koleksi tulisan-tulisan rivo yang dibuat selagi gabut.
-      memiliki topik bervariasi <span class="italic">(dan tidak selalu berbobot).</span>
+      memiliki topik bervariasi <span class="italic">(dan tidak [selalu] berbobot).</span>
     </p>
   </div>
 
+
+  <div class="flex flex-col mb-12 gap-8">
+    {allArticles.map((el: any) => (
+      <a href={`/${el.slug}`} class="text-black hover:text-orange-600 transition">
+        <h1 class="text-3xl mb-2">{el.data.title}</h1>
+        <h4 class="text-gray-800 text-base mb-8">{new Date(el.data.date).toLocaleDateString("id-ID", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</h4>
+        <div class="b-b-1 border-gray-300" />
+      </a>
+    ))}
+  </div>
+ 
 </Layout>
