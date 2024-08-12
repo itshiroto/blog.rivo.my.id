@@ -23,12 +23,18 @@ const { Content } = await entry.render();
     <div class="inline-block i-ci-thin-long-left size-8"></div>
     Kembali ke halaman depan
   </a>
-  <div class="mb-12">
-    <h1 class="text-2xl sm:text-6xl mb-4 font-bold">{entry.data.title}</h1>
-    <h4 class="text-sm text-gray-600 sm:text-base italic mb-6">ditulis pada {new Date(entry.data.date).toLocaleDateString("id-ID", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</h4>
-    <div class="w-full border-b border-gray-300"/>
-  </div>
-  <div class="prose text-justify sm:text-lg w-full">
+  <h1 class="text-2xl sm:text-6xl mb-6 font-bold">{entry.data.title}</h1>
+  <div class="w-full b-b-1 mb-12 border-gray-400" />
+  <div class="prose text-justify sm:text-lg w-full mb-12">
     <Content/>
   </div>
+  <div class="w-full b-b-1 mb-6 border-gray-300" />
+  <h4 class="text-sm text-gray-500 sm:text-base lowercase italic mb-16 text-right">
+    ditulis pada {new Date(entry.data.date).toLocaleDateString("id-ID", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
+    { 
+      entry.data.location ? 
+      <span>di {entry.data.location}</span> : 
+      ""
+    }
+  </h4>
 </Layout>

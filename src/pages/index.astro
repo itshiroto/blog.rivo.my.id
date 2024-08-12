@@ -5,7 +5,7 @@ import { getCollection } from "astro:content"
 const allArticles = await getCollection('articles');
 ---
 
-<Layout title="test">
+<Layout>
   <div class="flex flex-col sm:flex-row sm:items-end sm:gap-16 gap-8 mb-24">
     <h1 class="font-bold text-5xl">
       catatan <br />
@@ -20,10 +20,10 @@ const allArticles = await getCollection('articles');
 
 
   <div class="flex flex-col mb-12 gap-8">
-    {allArticles.map((el: any) => (
-      <a href={`/${el.slug}`} class="text-black hover:text-orange-600 transition">
-        <h1 class="text-3xl mb-2">{el.data.title}</h1>
-        <h4 class="text-gray-800 text-base mb-8">{new Date(el.data.date).toLocaleDateString("id-ID", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</h4>
+    {allArticles.map((el: any) => !el.data.hidden && (
+      <a href={`/${el.slug}`} class="group">
+        <h1 class="text-black group-hover:bg-orange-200 w-fit text-3xl mb-2 transition">{el.data.title}</h1>
+        <h4 class="text-gray-600 text-base mb-8">{new Date(el.data.date).toLocaleDateString("id-ID", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</h4>
         <div class="b-b-1 border-gray-300" />
       </a>
     ))}
