@@ -3,6 +3,7 @@ title: Swingin' around
 date: 2024-08-31
 location: kos
 tags: ["curhat", "shorttext"]
+hidden: true
 ---
 
 > At last shit happened, and I hope this would end soon.
